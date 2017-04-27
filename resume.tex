@@ -2,23 +2,31 @@
 
 % Packages
 \RequirePackage{color,graphicx}
-\usepackage{lingmacros}
-\usepackage{titlesec}
+\usepackage{titlesec}                         % Help with title formatting
+\usepackage{extsizes}                         % Allow smaller font sizes
+\usepackage{enumitem}                         % To allow setting bullet style
 \usepackage{multicol}                         % Multi-column layout
-\usepackage{ragged2e}                         % Justficiation
 \usepackage{bold-extra}                       % To allow bold smallcaps
-\usepackage[a4paper, margin=0.5in]{geometry}
-
-% Setup hyperref package, and colors for links
-\usepackage{hyperref}
-\definecolor{linkcolour}{rgb}{0,0.2,0.6}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+\usepackage[a4paper, margin=0.5in]{geometry}  % Set document properties
 
 % Formatting Setup
+\fontsize{9.5}{12}\selectfont
 \titleformat{\section}{\Large\scshape\bfseries\raggedright}{}{0em}{}[\titlerule]
 \titlespacing{\section}{0pt}{3pt}{3pt}
 \titleformat{\subsection}{\itshape\raggedright}{}{0em}{}
 \titlespacing{\subsection}{0pt}{3pt}{3pt}
+% Style Overrides
+\setlength\parindent{0pt}
+\setlist[itemize]{noitemsep, topsep=0pt}
+\setlength\multicolsep{0pt}
+\setlength{\columnsep}{0.1em}
+
+% Custom Commands
+% These we use to justfify partial lines
+\newcommand{\startsquarepar}{\par\begingroup \parfillskip 0pt \relax}
+\newcommand{\stopsquarepar}{\par\endgroup}
+% For finetuning font control
+\newenvironment{ninept}{\fontsize{9}{12}\selectfont}{\par}
 
 % Begin the document
 \begin{document}
@@ -27,33 +35,40 @@
 
 % Title
 \section*{\Huge Nathan E. Disidore}
-\begin{justify}
-  3429 22nd Street South Arlington, Virgina 22204 (913) 961 - 7749 ndisidore@gmail.com
-\end{justify}
+\startsquarepar
+  3429 22nd Street South $\cdot$ Arlington, Virgina 22204 $\cdot$ (913) 961 - 7749 $\cdot$ ndisidore@gmail.com
+\stopsquarepar
 
 \section*{Professional Profile}
 Self-motivated, versatile Computer Engineer looking to develop and utilize my passion for the sciences and new and emerging technologies. Extensive background in both programming and hardware-related roles with proven experience in full product life cycle development. Field tested successfully in sink-or-swim situations. Flexible and able to work productively with a wide variety of people.
 
 \section*{Education}
 \subsection*{Completed Coursework:}
-\begin{multicols}{4}
-  \begin{itemize}
-    \item Circuits I/II
-    \item Communication Networks
-    \item Programming Paradigms
-    \item Network Implementation
-    \item Programming I/II
-    \item Computer Architecture
-    \item Comp. Systems + Assembly
-    \item Adv. Computer Organization
-    \item Discrete Structures
-    \item Software Development
-    \item Functional Programming
-    \item Electromagnetics
-    \item Embedded Systems
-    \item Digital System Design
-    \item Operating Systems
-  \end{itemize}
-\end{multicols}
+\begin{ninept}
+  \begin{multicols}{4}
+    \begin{itemize}
+      \item Circuits I/II
+      \item Communication Networks
+      \item Programming Paradigms
+      \item Programming I/II
+      \item Organization/Architecture
+      \item Systems \& Assembly
+      \item Discrete Structures
+      \item Functional Programming
+      \item Electromagnetics
+      \item Embedded Systems
+      \item Digital System Design
+      \item Operating Systems
+    \end{itemize}
+  \end{multicols}
+\end{ninept}
+
+\section*{Skill Profile}
+\subsection*{Programing Languages:}
+C/C++, Java, PHP, Ruby, Rust, Python, ES6, JavaScript, NodeJS, ExpressJS, React, Redux, BackboneJS, VHDL, Verilog, Assembly, Lua, .NET 4.0, C\#, MVC, Haskell, HTML 5.0, CSS 3.0, Bash, MatLab, OpenGL 3.0
+\subsection*{Databases:}
+PostgreSQL, MongoDB, DynamoDB, MySQL, Oracle 10
+\subsection*{Hardware:}
+PCB Design, MCU, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendSim, ModelSim, CISCO Routers/Switches, VLANs, Pv6, Multicast
 
 \end{document}
