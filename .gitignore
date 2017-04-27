@@ -1,0 +1,16 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+
+# PDF output
+*.pdf
+
+# LaTeX Beamer
+*.snm
+*.vrb
+*.nav
+*.out
+
+# Sample CV
+cv.tex

@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+
+% Packages
+\RequirePackage{color,graphicx}
+\usepackage{lingmacros}
+\usepackage{titlesec}
+\usepackage{multicol}                         % Multi-column layout
+\usepackage{ragged2e}                         % Justficiation
+\usepackage{bold-extra}                       % To allow bold smallcaps
+\usepackage[a4paper, margin=0.5in]{geometry}
+
+% Setup hyperref package, and colors for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+% Formatting Setup
+\titleformat{\section}{\Large\scshape\bfseries\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+\titleformat{\subsection}{\itshape\raggedright}{}{0em}{}
+\titlespacing{\subsection}{0pt}{3pt}{3pt}
+
+% Begin the document
+\begin{document}
+
+\pagestyle{empty} % non-numbered pages
+
+% Title
+\section*{\Huge Nathan E. Disidore}
+\begin{justify}
+  3429 22nd Street South Arlington, Virgina 22204 (913) 961 - 7749 ndisidore@gmail.com
+\end{justify}
+
+\section*{Professional Profile}
+Self-motivated, versatile Computer Engineer looking to develop and utilize my passion for the sciences and new and emerging technologies. Extensive background in both programming and hardware-related roles with proven experience in full product life cycle development. Field tested successfully in sink-or-swim situations. Flexible and able to work productively with a wide variety of people.
+
+\section*{Education}
+\subsection*{Completed Coursework:}
+\begin{multicols}{4}
+  \begin{itemize}
+    \item Circuits I/II
+    \item Communication Networks
+    \item Programming Paradigms
+    \item Network Implementation
+    \item Programming I/II
+    \item Computer Architecture
+    \item Comp. Systems + Assembly
+    \item Adv. Computer Organization
+    \item Discrete Structures
+    \item Software Development
+    \item Functional Programming
+    \item Electromagnetics
+    \item Embedded Systems
+    \item Digital System Design
+    \item Operating Systems
+  \end{itemize}
+\end{multicols}
+
+\end{document}
