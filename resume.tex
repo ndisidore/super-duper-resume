@@ -2,6 +2,7 @@
 
 % Packages
 \RequirePackage{color,graphicx}
+\usepackage{scrextend}
 \usepackage{titlesec}                         % Help with title formatting
 \usepackage{extsizes}                         % Allow smaller font sizes
 \usepackage{enumitem}                         % To allow setting bullet style
@@ -25,10 +26,17 @@
 % These we use to justfify partial lines
 \newcommand{\startsquarepar}{\par\begingroup \parfillskip 0pt \relax}
 \newcommand{\stopsquarepar}{\par\endgroup}
-% Line specific indent
-\newcommand{\forceindent}{\leavevmode{\parindent=1em\indent}}
 % For finetuning font control
 \newenvironment{ninept}{\fontsize{9}{12}\selectfont}{\par}
+
+% Patches
+\makeatletter
+% Remove top margin from addmargin
+\let\@addmarginORIG\@addmargin
+\renewcommand*\@addmargin{%
+    \vspace{-\bigskipamount}
+    \@addmarginORIG}
+\makeatother
 
 % Begin the document
 \begin{document}
@@ -43,7 +51,7 @@
 
 % Sections
 \section*{Professional Profile}
-Self-motivated, versatile Computer Engineer looking to develop and utilize my passion for the sciences and new and emerging technologies. Extensive background in both programming and hardware-related roles with proven experience in full product life cycle development. Field tested successfully in sink-or-swim situations. Flexible and able to work productively with a wide variety of people.
+Self-motivated, versatile Computer Engineer looking to develop and utilize my passion for the sciences and emerging technologies. Extensive background in both programming and hardware-related roles with proven experience in full product life cycle development. Field tested successfully in sink-or-swim situations. Flexible yet adept and team oriented.
 
 \section*{Education}
 \textbf{The University of Kansas $\cdot$ Cumulative GPA: 3.42 $\cdot$ Professional GPA: 3.50}
@@ -83,13 +91,25 @@ PCB Design, MCU, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendS
 
 \section*{Work Experience}
 \textbf{Product Team, Targeted Victory} \hfill Alexandria, VA \\
-\textit{Targeted Victory is a front-runner in the political digital advertising space serving over 130 clients nationwide.} \\
-\forceindent \textbf{Developer} \hfill \textit{September 2103 $\textendash{}$ Present}
+\textit{Targeted Victory is a media and technology firm specializing in fundraising, advocacy, and constituency development.} \\
+\begin{addmargin}[1em]{0em}
+  Co-developed an in-house fundraising portal solution utilizing REST API with OAuth support and single sign on capabilities across multiple client websites, one click and email functionality, and secure card processing \\
+  \textbf{Full Stack Devops Developer} \hfill \textit{September 2103 $\textendash{}$ Present}
+\end{addmargin}
 \begin{itemize}
-  \item Spearheaded migration to the latest webdev technologies including NodeJS, Grunt/Gulp, Bootstrap and Backbone
-  \item Configured and maintained 16 production level AWS servers with Apache, Docker, Varnish, Memcache and Pound
-  \item Initiated good practices by introducing automated build tests and bringing flagship product up to coding standards
+  \item Introduced and embraced the latest technologies including an automated build process utilizing Grunt, adhering to MVC design using Backbone, dependency management using RequireJS and Composer, and standards checking
+  \item Willingly assumed additional server administration role with the need was identified, handling server setup and L.E.M.P. configuration, site migration, VPC setup, load balancing, and AWS EC2 cloud instance management
+  \item Reworked system architecture to support real time server monitoring, elastic load balancing, CDN distribution and Web Application Firewall implementation, reducing hosting costs by \$20,000/month and increasing PCI compliance
 \end{itemize}
-\forceindent \textit{Technologies:} PHP, REST API, NodeJS, AJAX, Backbone, RequireJS, Apache, Docker, Varnish, Memcache, Pound
+\textit{Technologies:} PHP, Ruby on Rails, Laravel, Wordpress, JavaScript, REST, Backbone.js, MVC, RequireJS, Node.js, Grunt, OAuth, CORS, AWS EC2, nginx, Apache, Varnish, BASH, Docker, VPC, Cloudflare, Continuous Integration
+
+\section*{Noteworthy Projects}
+\textbf{Autonomous Quadrotor Helicopter $\cdot$ The University of Kansas} \hfill \textit{August 2012  $\textendash{}$ May 2013} \\
+Augmented Quadrotor Helicopter with GPS capabilities to allow autonomous flight via a pre-programmed flight path. Served as team-lead in a 3 man squad. Integrated a Raspberry Pi with the drone allowing calculation of heading and bearing to the target and commands to be relayed to the drone to execute the necessary maneuvers to stay on target.
+\begin{itemize}
+  \item Implemented modified Agile processes for development team, with stand-ups and sprints to achieve product MVP
+  \item Ensured necessary communication streams between different hardware components using sockets and UDP
+\end{itemize}
+\textit{Technologies:} C++, Java, GPSD, Soldering, UDP, Sockets, Baud Rate, Raspberry Pi, Linux, ARM, Cross Compiling
 
 \end{document}
