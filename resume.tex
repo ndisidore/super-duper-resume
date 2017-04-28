@@ -25,6 +25,8 @@
 % These we use to justfify partial lines
 \newcommand{\startsquarepar}{\par\begingroup \parfillskip 0pt \relax}
 \newcommand{\stopsquarepar}{\par\endgroup}
+% Line specific indent
+\newcommand{\forceindent}{\leavevmode{\parindent=1em\indent}}
 % For finetuning font control
 \newenvironment{ninept}{\fontsize{9}{12}\selectfont}{\par}
 
@@ -48,7 +50,7 @@ Self-motivated, versatile Computer Engineer looking to develop and utilize my pa
 \hfill
 Lawrence, KS \\
 \textbf{Bachelor of Science in Computer Engineering}
-\textit{$\textemdash$ Dean$\rq$s List (4 semesters)}
+\textit{$\textendash{}$ Dean$\rq$s List (4 semesters)}
 \hfill
 \textit{Graduated May 2014}
 \subsection*{Completed Coursework:}
@@ -77,6 +79,17 @@ C/C++, Java, PHP, Ruby, Rust, Python, ES6, JavaScript, NodeJS, ExpressJS, React,
 \subsection*{Databases:}
 PostgreSQL, MongoDB, DynamoDB, MySQL, Oracle 10
 \subsection*{Hardware:}
-PCB Design, MCU, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendSim, ModelSim, CISCO Routers/Switches, VLANs, Pv6, Multicast
+PCB Design, MCU, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendSim, ModelSim, CISCO Routers/Switches, VLANs, IPv6, Multicast
+
+\section*{Work Experience}
+\textbf{Product Team, Targeted Victory} \hfill Alexandria, VA \\
+\textit{Targeted Victory is a front-runner in the political digital advertising space serving over 130 clients nationwide.} \\
+\forceindent \textbf{Developer} \hfill \textit{September 2103 $\textendash{}$ Present}
+\begin{itemize}
+  \item Spearheaded migration to the latest webdev technologies including NodeJS, Grunt/Gulp, Bootstrap and Backbone
+  \item Configured and maintained 16 production level AWS servers with Apache, Docker, Varnish, Memcache and Pound
+  \item Initiated good practices by introducing automated build tests and bringing flagship product up to coding standards
+\end{itemize}
+\forceindent \textit{Technologies:} PHP, REST API, NodeJS, AJAX, Backbone, RequireJS, Apache, Docker, Varnish, Memcache, Pound
 
 \end{document}
