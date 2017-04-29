@@ -18,7 +18,7 @@
 \titlespacing{\subsection}{0pt}{3pt}{3pt}
 % Style Overrides
 \setlength\parindent{0pt}
-\setlist[itemize]{noitemsep, topsep=0pt}
+\setlist[itemize]{nosep, noitemsep, leftmargin=1.5em}
 \setlength\multicolsep{0pt}
 \setlength{\columnsep}{0.1em}
 
@@ -27,7 +27,7 @@
 \newcommand{\startsquarepar}{\par\begingroup \parfillskip 0pt \relax}
 \newcommand{\stopsquarepar}{\par\endgroup}
 % For finetuning font control
-\newenvironment{ninept}{\fontsize{9}{12}\selectfont}{\par}
+\newenvironment{ninept}{\fontsize{10}{12}\selectfont}{\par}
 
 % Patches
 \makeatletter
@@ -82,28 +82,54 @@ Lawrence, KS \\
 \end{ninept}
 
 \section*{Skill Profile}
-\subsection*{Programing Languages:}
-C/C++, Java, PHP, Ruby, Rust, Python, ES6, JavaScript, NodeJS, ExpressJS, React, Redux, BackboneJS, VHDL, Verilog, Assembly, Lua, .NET 4.0, C\#, MVC, Haskell, HTML 5.0, CSS 3.0, Bash, MatLab, OpenGL 3.0
-\subsection*{Databases:}
-PostgreSQL, MongoDB, DynamoDB, MySQL, Oracle 10
+\subsection*{Programing Languages \& Databases:}
+C/C++, Java, PHP, Ruby, Rust, Python, ES6, JavaScript, NodeJS, ExpressJS, React, Redux, BackboneJS, VHDL, Assembly, Lua, .NET 4.0, C\#, Haskell, HTML 5.0, CSS 3.0, MatLab, OpenGL 3.0, PostgreSQL, MongoDB, DynamoDB
 \subsection*{Hardware:}
 PCB Design, MCU, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendSim, ModelSim, CISCO Routers/Switches, VLANs, IPv6, Multicast
 
 \section*{Work Experience}
+% Targeted Victory
 \textbf{Product Team, Targeted Victory} \hfill Alexandria, VA \\
 \textit{Targeted Victory is a media and technology firm specializing in fundraising, advocacy, and constituency development.} \\
 \begin{addmargin}[1em]{0em}
+  \textbf{Full Stack Devops Developer} \hfill \textit{September 2013 $\textendash{}$ Present} \\
   Co-developed an in-house fundraising portal solution utilizing REST API with OAuth support and single sign on capabilities across multiple client websites, one click and email functionality, and secure card processing \\
-  \textbf{Full Stack Devops Developer} \hfill \textit{September 2103 $\textendash{}$ Present}
+  \vspace{-1em}
+  \begin{itemize}
+    \item Introduced and embraced the latest technologies including an automated build process utilizing Grunt, adhering to MVC design using Backbone, dependency management using RequireJS and Composer, and standards checking
+    \item Willingly assumed additional server administration role with the need was identified, handling server setup and L.E.M.P. configuration, site migration, VPC setup, load balancing, and AWS EC2 cloud instance management
+    \item Reworked system architecture to support real time server monitoring, elastic load balancing, CDN distribution and Web Application Firewall implementation, reducing hosting costs by \$20,000/month and increasing PCI compliance
+  \end{itemize}
+  \textit{Technologies:} PHP, Ruby on Rails, Laravel, Wordpress, JavaScript, REST, Backbone.js, MVC, RequireJS, Node.js, Grunt, OAuth, CORS, AWS EC2, nginx, Apache, Varnish, BASH, Docker, VPC, Cloudflare, Continuous Integration
 \end{addmargin}
-\begin{itemize}
-  \item Introduced and embraced the latest technologies including an automated build process utilizing Grunt, adhering to MVC design using Backbone, dependency management using RequireJS and Composer, and standards checking
-  \item Willingly assumed additional server administration role with the need was identified, handling server setup and L.E.M.P. configuration, site migration, VPC setup, load balancing, and AWS EC2 cloud instance management
-  \item Reworked system architecture to support real time server monitoring, elastic load balancing, CDN distribution and Web Application Firewall implementation, reducing hosting costs by \$20,000/month and increasing PCI compliance
-\end{itemize}
-\textit{Technologies:} PHP, Ruby on Rails, Laravel, Wordpress, JavaScript, REST, Backbone.js, MVC, RequireJS, Node.js, Grunt, OAuth, CORS, AWS EC2, nginx, Apache, Varnish, BASH, Docker, VPC, Cloudflare, Continuous Integration
+% CivicPlus
+\textbf{Product Team, CivicPlus} \hfill Manhattan, Kansas \\
+\textit{CivicPlus provides a platform that allows over 1,100 communities to actively engage and interact with their government.} \\
+\begin{addmargin}[1em]{0em}
+  \textbf{Software Developer Intern} \hfill \textit{May 2012 $\textendash{}$ August 2012} \\
+  Diagnosed and repaired bugs in the flagship solution in an agile development cycle to fuel community engagement. \\
+  \vspace{-1em}
+  \begin{itemize}
+    \item Started with little to no experience with C\#, ISS, or Visual Studio; learned through trial-by-fire immersion
+    \item Member of the bug fixing team, committing 70+ fixes worth over 200 story points in production code
+  \end{itemize}
+  \textit{Technologies:} .NET 4.0, C\#, AJAX, JavaScript, REST API, MVC, Windows Server 2012 with IIS, Memory Profiling
+\end{addmargin}
+% KU Student Housing
+\textbf{KU Student Housing, The University of Kansas} \hfill Lawrence, Kansas \\
+\textit{KU Student Housing provides housing and programs for more than 5,200 students in 62 buildings across campus.} \\
+\begin{addmargin}[1em]{0em}
+  \textbf{Student Web Technician} \hfill \textit{August 2011 $\textendash{}$ September 2013} \\
+  Sole management and maintenance of all student housing related web content. Migrated CMS platforms from Wordpress to Drupal, including creation of a theme, leveraging responsive design and Shibboleth integration \\
+  \vspace{-1em}
+  \begin{itemize}
+    \item Facilitated migration between CMSs, reworking templates, taxonomy and layout and consolidating existing pages
+  \end{itemize}
+  \textit{Technologies:} PHP, Apache, Shibboleth, Linux, HTML 5, CSS 3, JavaScript, OOP, Drupal
+\end{addmargin}
 
 \section*{Noteworthy Projects}
+% Drone Copter
 \textbf{Autonomous Quadrotor Helicopter $\cdot$ The University of Kansas} \hfill \textit{August 2012  $\textendash{}$ May 2013} \\
 Augmented Quadrotor Helicopter with GPS capabilities to allow autonomous flight via a pre-programmed flight path. Served as team-lead in a 3 man squad. Integrated a Raspberry Pi with the drone allowing calculation of heading and bearing to the target and commands to be relayed to the drone to execute the necessary maneuvers to stay on target.
 \begin{itemize}
@@ -111,5 +137,23 @@ Augmented Quadrotor Helicopter with GPS capabilities to allow autonomous flight 
   \item Ensured necessary communication streams between different hardware components using sockets and UDP
 \end{itemize}
 \textit{Technologies:} C++, Java, GPSD, Soldering, UDP, Sockets, Baud Rate, Raspberry Pi, Linux, ARM, Cross Compiling
+
+\section*{Leadership / Activities}
+% Zipline
+\textbf{Startup Weekend D.C. $\cdot$ People's Choice Award} \hfill Washington, D.C. \\
+\textit{Developer: Zipline \hfill November 2015} \\
+\vspace{-1em}
+\begin{itemize}
+  \item Participated in the setup of the business logic and developed API to communicate with Target's data warehouse
+  \item Spun up a MEAN stack based web portal for user login and to serve as the client facing website
+\end{itemize}
+% iSurvive
+\textbf{Microsoft Health and Wellness Hack-a-ton $\cdot$ Third Place Team} \hfill Washington, D.C. \\
+\textit{Developer: iSurvive \hfill June 2015} \\
+\vspace{-1em}
+\begin{itemize}
+  \item Helped spec and architect native mobile app for managing HIV, spearheading iOS and Android development
+  \item Setup and deployed Laravel 5.0 REST server, utilizing MVC for app data flow
+\end{itemize}
 
 \end{document}
