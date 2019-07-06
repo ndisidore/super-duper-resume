@@ -6,16 +6,17 @@
 \usepackage{scrextend}                        % Allows patches to addmargin
 \usepackage{textcomp}                         % For special characters
 \usepackage{titlesec}                         % Help with title formatting
-\usepackage{enumitem}                         % Allow setting bullet style
+\usepackage[inline]{enumitem}                 % Allow setting bullet style
 \usepackage{multicol}                         % Multi-column layout
 \usepackage{bold-extra}                       % Allow bold smallcaps
+\usepackage{datatool}                         % Used in sorting data
 \usepackage[letterpaper, margin=0.5in]{geometry}  % Set document properties
 
 % Formatting Setup
 \titleformat{\section}{\Large\scshape\bfseries\raggedright}{}{0em}{}[\titlerule]
 \titlespacing{\section}{0pt}{3pt}{3pt}
 \titleformat{\subsection}{\itshape\raggedright}{}{0em}{}
-\titlespacing{\subsection}{0pt}{3pt}{3pt}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
 % Style Overrides
 \setlength\parindent{0pt}
 \setlist[itemize]{nosep, noitemsep, leftmargin=1.5em}
@@ -26,6 +27,34 @@
 % These we use to justfify partial lines
 \newcommand{\startsquarepar}{\par\begingroup \parfillskip 0pt \relax}
 \newcommand{\stopsquarepar}{\par\endgroup}
+% Allow sorted lists
+\newcommand{\sortitem}[2][\relax]{
+  \DTLnewrow{list}                        % Create a new entry
+  \ifx#1\relax
+    \DTLnewdbentry{list}{sortlabel}{#2}   % Add entry sortlabel (with optional sortkey)
+  \else
+    \DTLnewdbentry{list}{sortlabel}{#1}   % Add entry sortlabel (without optional sortkey)
+  \fi
+  \DTLnewdbentry{list}{description}{#2}   % Add entry description
+}
+% Bulleted row sorted list
+\newenvironment{sortedlist}{
+  \DTLifdbexists{list}{\DTLcleardb{list}}{\DTLnewdb{list}}    % Create new/discard old list
+}{
+  \DTLsort{sortlabel}{list} % Sort list
+  \begin{itemize}
+    \DTLforeach*{list}{\theDesc=description}{\item \theDesc}  % Print each item
+  \end{itemize}
+}
+% Inline horizontal sorted list
+\newenvironment{sortedInlineList}{
+  \DTLifdbexists{list}{\DTLcleardb{list}}{\DTLnewdb{list}}    % Create new/discard old list
+}{
+  \DTLsort{sortlabel}{list} % Sort list
+  \begin{itemize*}[label={}, itemjoin={,}, leftmargin=*]
+    \DTLforeach*{list}{\theDesc=description}{\item \theDesc}  % Print each item
+  \end{itemize*}
+}
 
 % Patches
 \makeatletter
@@ -55,26 +84,62 @@ Self-motivated, versatile Computer Engineer looking to develop and utilize my pa
 
 \section*{Skill Profile}
 \subsection*{Programming Languages \& Databases:}
-C/C++, Java, PHP, Ruby, Rust, Python, ES6, JavaScript, NodeJS, ExpressJS, React, Redux, BackboneJS, VHDL, Assembly, Lua, .NET 4.0, C\#, Haskell, HTML 5.0, CSS 3.0, MatLab, OpenGL 3.0, PostgreSQL, MongoDB, DynamoDB
+\begin{sortedInlineList}
+  % Core
+  \sortitem[corePython]{Python}
+  \sortitem[coreRust]{Rust}
+  \sortitem[coreC]{C/C++}
+  \sortitem[coreJava]{Java}
+  \sortitem[coreRuby]{Ruby}
+  \sortitem[coreCSharp]{C\#}
+  % Web Tech
+  \sortitem[webES6]{ES6}
+  \sortitem[webNode]{NodeJS}
+  \sortitem[webReact]{React}
+  \sortitem[webRedux]{Redux}
+  \sortitem[webExpress]{Express}
+  \sortitem[webGraphQL]{GraphQL}
+  % Functional
+  \sortitem[functLua]{Lua}
+  \sortitem[functHaskell]{Haskell}
+  % Hardware
+  \sortitem[hardVHDL]{VHDL}
+  \sortitem[hardAssembly]{Assembly}
+  % Databases
+  \sortitem[dbPostgres]{PostgreSQL}
+  \sortitem[dbMongo]{MongoDB}
+  \sortitem[dbDynamo]{DynamoDB}
+\end{sortedInlineList}
 \subsection*{Hardware:}
-PCB Design, MCU, MQTT, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, ExtendSim, ModelSim, CISCO Routers/Switches, VLANs, IPv6, Multicast
+\begin{sortedInlineList}
+  \sortitem{PCB Design}
+  \sortitem{Raspberry Pi}
+  \sortitem{Ardunio}
+  \sortitem{Xilinx}
+  \sortitem{Modbus}
+  \sortitem{CISCO Routers/Switches}
+  \sortitem{Multicast}
+  \sortitem{Docker}
+\end{sortedInlineList}
 
 \section*{Work Experience}
 % Pason Power
 \textbf{Pason Power} \hfill Houston, TX \\
-\textit{Pason Power empowers customers to save electricity by bringing intelligence to solar and battery energy management systems.} \\
+\textit{Pason Power empowers customers to realize eco and cost energy savings via ML driven solar and battery management systems.} \\
 \begin{addmargin}[1em]{0em}
   \textbf{Chief Cloud Architect \& Full Stack Engineer} \hfill \textit{June 2017 \textendash{} Present} \\
-  Member of founding team for hardware startup. Lead decisions on tech stack, built out cloud infrastructure (including IaaS), and built   \\
+  Member of founding team for hardware startup. Lead decisions on tech stack, built out cloud infrastructure, interfaced directly with clients in both a sales and support capacity, and solved scaling issues  \\
   \vspace{-1.1em}
   \begin{itemize}
-    \item Co-architected and implemented a serverless backend allowing for on-demand scalability an minimal resource usage utilizing Express.js with connections to AWS Lambda, S3, DynamoDB, CloudFront, CloudSearch and IoT
-    \item Conceptualized and scripted hardware OTA process, interfacing with MCU driver code up to the cloud features including firmware management and staged device deploys
-    \item Authored and developed admin dashboard using React, Redux, Webpack and other leading technologies
-    \item Implemented device commissioning process, working with manufacturer to develop custom API for secure device registration to Knocki cloud, including certificate juggling and record creation with manufacturing specifics
+    \item Kickstarted critical infrastructure work, including introduction of CI deploys and architecture as code via IaaS to support self-healing, load balanced, and auto-scaling instances with blue green deploys
+    \item Architected on-boarding and commissioning process for end devices, targeting multiple client personas along the way, managing configuration stacks with over 150 parameters, with real time updates via async iterators with pubsub
+    \item Deployed both a data ingestion pipeline, utilizing IoT Core as a broker, Kinesis, and Redis for supporting real time data, and a secure command and control proxy for cloud to device signals
+    \item Advocated for and ushered in a modern web stack, facilitating migration to Material UI, GraphQL, and latest Babel and Webpack
+    \item Collaborated closely with sales, driving multiple client demos and implementing key functionality ultimately helping the company transition from zero to over \$1M annually
+    \item Responsible for hiring, designed interview exercises and standardized list of questions, helping grow team from 5 to 20
   \end{itemize}
-  \textit{Dev Technologies:} GraphQL, Javascript, ES6, Node, ExpressJS, Babel, MQTT, SSO, OAuth, Websockets, Docker, Redis, Python,
-  \textit{Cloud Technologies:} AWS Lambda, CloudFormation, DynamoDB, CloudFront, Kinesis, ECS, Elastic Beanstalk, IoT Core, Elasticache, Security Groups, VPCs (with Peering)
+  \textit{Dev Technologies:} GraphQL, Javascript, ES6, Node, ExpressJS, Babel, MQTT, SSO, OAuth, JWT, Websockets, Docker, Redis, Python, TimescaleDB, Postgres, MySQL \\
+  \textit{Cloud Technologies:} Lambda, CloudFormation, DynamoDB, CloudFront, Kinesis, ECS, ECR, Elastic Beanstalk, IoT, ElastiCache, Security Groups, VPCs (with Peering)
 \end{addmargin}
 % Knocki
 \textbf{Knocki} \hfill Houston, TX \\
@@ -84,12 +149,13 @@ PCB Design, MCU, MQTT, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, E
   Member of founding team for hardware startup. Initiated contact with and vetted vendors, screened applicants and interns and represented the company at networking events and SXSW while building the cloud platform/integrations \\
   \vspace{-1.1em}
   \begin{itemize}
-    \item Co-architected and implemented a serverless backend allowing for on-demand scalability an minimal resource usage utilizing Express.js with connections to AWS Lambda, S3, DynamoDB, CloudFront, CloudSearch and IoT
+    \item Co-architected and implemented a serverless backend allowing for on-demand scalability and minimal resource usage utilizing Express.js with connections to AWS Lambda, S3, DynamoDB, CloudFront, CloudSearch and IoT
     \item Conceptualized and scripted hardware OTA process, interfacing with MCU driver code up to the cloud features including firmware management and staged device deploys
     \item Authored and developed admin dashboard using React, Redux, Webpack and other leading technologies
     \item Implemented device commissioning process, working with manufacturer to develop custom API for secure device registration to Knocki cloud, including certificate juggling and record creation with manufacturing specifics
   \end{itemize}
-  \textit{Technologies:} Serverless, Javascript, ES6, Node, ExpressJS, Babel, AWS Lambda, CloudFormation, DynamoDB, MongoDB, CloudFront, AWS IoT, MQTT, SSO, OAuth
+  \textit{Dev Technologies:} Serverless, Javascript, ES6, Node, ExpressJS, Babel, MQTT, SSO, OAuth, ClaudiaJS \\
+  \textit{Cloud Technologies:} AWS Lambda, CloudFormation, DynamoDB, MongoDB, CloudFront, AWS IoT
 \end{addmargin}
 % Targeted Victory
 \textbf{Product Team, Targeted Victory} \hfill Alexandria, VA \\
@@ -105,20 +171,15 @@ PCB Design, MCU, MQTT, Xilinx, Altera Quartus II, Raspberry Pi, Ardunio, JTAG, E
   \end{itemize}
   \textit{Technologies:} PHP, Ruby on Rails, Laravel, Wordpress, JavaScript, REST, Backbone.js, MVC, RequireJS, Node.js, Grunt, OAuth, CORS, AWS EC2, nginx, Apache, Varnish, BASH, Docker, VPC, Cloudflare, Continuous Integration
 \end{addmargin}
-% KU Student Housing
-\textbf{KU Student Housing, The University of Kansas} \hfill Lawrence, Kansas \\
-\textit{KU Student Housing provides housing and programs for more than 5,200 students in 62 buildings across campus.} \\
-\begin{addmargin}[1em]{0em}
-  \textbf{Student Web Technician} \hfill \textit{August 2011 \textendash{} September 2013} \\
-  Sole management and maintenance of all related web content. Migrated CMS platforms from Wordpress to Drupal. \\
-  \vspace{-1.1em}
-  \begin{itemize}
-    \item Facilitated migration between CMSs, reworking templates, taxonomy and layout and consolidating existing pages
-  \end{itemize}
-  \textit{Technologies:} PHP, Apache, Shibboleth, Linux, HTML 5, CSS 3, JavaScript, OOP, Drupal
-\end{addmargin}
 
 \section*{Leadership / Activities}
+% TCM Hackaton
+\textbf{TMC Biodesign Hackathon $\cdot$ People's Choice Award} \hfill Houston, TX\\
+\textit{Tech Lead: VertiKNOW \hfill April 2018} \\
+\vspace{-1.1em}
+\begin{itemize}
+  \item Shepherded team through technical requirements, developing an MVP hardware solution, and pitching to the judges.
+\end{itemize}
 % Tech.co SXSW Pitch
 \textbf{Tech.Co\textquotesingle{}s Startup Night at SXSW} \hfill Austin, TX\\
 \textit{Pitcher: Knocki \hfill March 2017} \\
@@ -182,41 +243,26 @@ Augmented Quadrotor Helicopter with GPS capabilities to allow autonomous flight 
   \item Ensured necessary communication streams between different hardware components using sockets and UDP
 \end{itemize}
 \textit{Technologies:} C++, Java, GPSD, Soldering, UDP, Sockets, Baud Rate, Raspberry Pi, Linux, ARM, Cross Compiling
-% OpenGL Kenny
-\textbf{OpenGL 3D Interactive Model $\cdot$ The University of Kansas} \hfill \textit{January 2011 \textendash{} May 2011} \\
-Developed a 3D OpenGL 3.1 model with a phong shader in C++ and user interaction via both keyboard and mouse.
-\begin{itemize}
-  \item Leveraged the Model-View-Controller design pattern allowing easy coordinate systems transforms during interaction
-\end{itemize}
-\textit{Technologies:} C++, OpenGL 3.1, GLUT, Eclipse, Git, MVC, Shaders, Data Structures \\
-% SMS Doghouse
-\textbf{SMSDoghouse} \hfill \textit{Ongoing} \\
-Developing open source intelligent SMS filtering app with android API 21+ and Material Design
 
 \section*{Education}
-\textbf{The University of Kansas $\cdot$ Cumulative GPA: 3.42 $\cdot$ Professional GPA: 3.50}
-\hfill
-Lawrence, KS \\
-\textbf{Bachelor of Science in Computer Engineering}
-\textit{\textendash{} Dean\textquotesingle{}s List (4 semesters)}
-\hfill
-\textit{Graduated May 2014}
+\textbf{The University of Kansas $\cdot$ Cumulative GPA: 3.42 $\cdot$ Professional GPA: 3.50} \hfill Lawrence, KS \\
+\textbf{Bachelor of Science in Computer Engineering} \textit{\textendash{} Dean\textquotesingle{}s List (4 semesters)} \hfill \textit{Graduated May 2014} \\
 \subsection*{Completed Coursework:}
 \begin{multicols}{4}
-  \begin{itemize}
-    \item Circuits I/II
-    \item Communication Networks
-    \item Programming Paradigms
-    \item Programming I/II
-    \item Organization/Architecture
-    \item Systems \& Assembly
-    \item Discrete Structures
-    \item Functional Programming
-    \item Electromagnetics
-    \item Embedded Systems
-    \item Digital System Design
-    \item Operating Systems
-  \end{itemize}
+  \begin{sortedlist}
+    \sortitem{Circuits I/II}
+    \sortitem{Communication Networks}
+    \sortitem{Programming Paradigms}
+    \sortitem{Programming I/II}
+    \sortitem{Organization/Architecture}
+    \sortitem{Systems \& Assembly}
+    \sortitem{Discrete Structures}
+    \sortitem{Functional Programming}
+    \sortitem{Electromagnetics}
+    \sortitem{Embedded Systems}
+    \sortitem{Digital System Design}
+    \sortitem{Operating Systems}
+  \end{sortedlist}
 \end{multicols}
 
 \section*{Involvement / Honors}
